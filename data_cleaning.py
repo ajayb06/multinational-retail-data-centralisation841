@@ -13,7 +13,7 @@ class DataCleaning:
     def clean_api_data(self, data):
         """
         Cleans data extracted from an API.
-
+ 
         :param data: JSON response from the API.
         :return: Cleaned data.
         """
@@ -23,5 +23,5 @@ class DataCleaning:
         Cleans data extracted from an S3 bucket.
 
         :param data: Content of the object in the S3 bucket.
-        :return: Cleaned data.
+        :return: Cleaned data
         """

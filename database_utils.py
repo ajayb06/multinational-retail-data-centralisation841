@@ -22,7 +22,7 @@ class DatabaseConnector:
         '''
     def execute_query(self, query):
          """
-        Executes a SQL query.
+        Executes a SQL query
 
         :param query: SQL query to be executed.
         :return: None
