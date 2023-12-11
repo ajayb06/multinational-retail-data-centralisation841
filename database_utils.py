@@ -1,29 +1,14 @@
 import psycopg2
+import yaml
+from sqlalchemy import create_engine
 
 class DatabaseConnector:
-    def __inni__(self, host, database, user, password):
-        self.host = host
-        self.database = database
-        self.user = user
-        self.password = password
 
-    def connect_to_database(self):
-        '''
-        Connects to PostgresSQL database
-
-        :return: None
-        '''
-
-    def disconnect_from_database(self):
-         '''
-        Disconnects from PostgresSQL database
-
-        :return: None
-        '''
-    def execute_query(self, query):
-         """
-        Executes a SQL query
-
-        :param query: SQL query to be executed.
-        :return: None
-        """
+    def read_db_creds(self, creds_file_path="db_creds.yaml"):
+        with open(creds_file_path, "r") as file:
+            return yaml.safe_load(file)
+        
+    def init_db_engine(self):
+        creds = self.read_db_creds()
+        db_url = f"postgresl://{creds['RDS_USER']}:{creds['RDS_PASSWORD']}@{creds['RDS_HOST']}:{creds['RDS_PORT']}/{creds['RDS_DATABASE']}"
+        return create_engine(db_url)
