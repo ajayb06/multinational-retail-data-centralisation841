@@ -1,5 +1,6 @@
 import yaml
 from sqlalchemy import create_engine, text
+import pandas as pd
 
 class DatabaseConnector:
     def __init__(self):
@@ -23,6 +24,7 @@ class DatabaseConnector:
             tables = [row[0] for row in result]
             return tables
     
-db_connector = DatabaseConnector()
-table_names = db_connector.list_db_tables()
-print("Tables in the database:", table_names)
+    def upload_to_db(self, df, table_name):
+        creds = self.read_db_creds()
+        engine = create_engine(f"postgresql://{creds['MY_USER']}:{creds['MY_PASSWORD']}@{creds['MY_HOST']}:{creds['MY_PORT']}/{creds['MY_DATABASE']}")
+        df.to_sql(table_name,engine, if_exists='replace', index=False)
