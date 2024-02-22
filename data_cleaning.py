@@ -36,7 +36,26 @@ class DataCleaning:
 
         return df
 
+    def clean_store_data(self, df):
+       
+        df = df.copy()
 
+        df.dropna(subset=['store_type', 'continent'], inplace=True)
 
+        df['continent'] = df['continent'].replace({'eeEurope':'Europe'})
 
+        df['opening_date'] = pd.to_datetime(df['opening_date'], errors='coerce')
+
+        df['staff_numbers'] = pd.to_numeric(df['staff_numbers'], errors='coerce')
+
+        df['longitude'] = pd.to_numeric(df['longitude'], errors='coerce')
+        
+        df['latitude'] = pd.to_numeric(df['latitude'], errors='coerce')
+
+        df.dropna(subset=['longitude', 'latitude', 'staff_numbers'], inplace=True)
+
+        df.reset_index(drop=True, inplace=True)
+
+        return df
+    
 

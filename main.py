@@ -15,3 +15,10 @@ pdf_link = "https://data-handling-public.s3.eu-west-1.amazonaws.com/card_details
 extracted_card_data  = data_extractor.retrieve_pdf_data(pdf_link)
 cleaned_card_details = data_cleaner.clean_card_data(extracted_card_data)
 db_connector.upload_to_db(cleaned_card_details, 'dim_card_details')
+
+number_of_stores = data_extractor.list_number_of_stores()
+
+
+all_store_data = data_extractor.retrieve_store_data()
+cleaned_store_data = data_cleaner.clean_store_data(all_store_data)
+db_connector.upload_to_db(cleaned_store_data, 'dim_store_details')
