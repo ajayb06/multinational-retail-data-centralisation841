@@ -2,6 +2,8 @@ from database_utils import DatabaseConnector
 import pandas as pd  
 import tabula
 import requests
+import boto3
+from io import StringIO
 
 class DataExtractor:
     def __init__(self):
@@ -24,7 +26,7 @@ class DataExtractor:
             number_of_stores = response.json().get('number_stores')
             return number_of_stores
         else:
-            raise Exception("Failes to retrieve number of stores")
+            raise Exception("Failed to retrieve number of stores")
     
     def retrieve_store_data(self):
         number_of_stores = self.list_number_of_stores()
@@ -40,3 +42,17 @@ class DataExtractor:
         
         return pd.DataFrame(all_store_data)
     
+    def extract_from_s3(self, s3_path):
+
+        bucket_name, key = s3_path.replace("s3://", "").split("/" , 1)
+
+        s3 = boto3.client('s3')
+        csv_obj = s3.get_object(Bucket = bucket_name, Key = key)
+        body = csv_obj['Body'].read().decode('utf-8')
+
+        pd.set_option('display.max_rows', None) 
+        
+        data = StringIO(body)
+        df = pd.read_csv(data)
+        
+        return df
