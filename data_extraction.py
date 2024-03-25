@@ -3,7 +3,7 @@ import pandas as pd
 import tabula
 import requests
 import boto3
-from io import StringIO
+from io import StringIO, BytesIO
 
 class DataExtractor:
     def __init__(self):
@@ -56,3 +56,17 @@ class DataExtractor:
         df = pd.read_csv(data)
         
         return df
+    
+    def extract_json_from_s3(self, url):
+
+        url_split = url.replace("https://", "").split("/")
+        bucket_name = url_split[0].split(".")[0]
+        object_key = "/".join(url_split[1:])
+        
+        s3_client = boto3.client('s3')
+
+        s3_response = s3_client.get_object(Bucket=bucket_name, Key=object_key)
+        content = s3_response['Body'].read()
+
+    
+        return pd.read_json(BytesIO(content))

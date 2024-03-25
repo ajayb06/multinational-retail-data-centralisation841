@@ -6,6 +6,9 @@ class DataCleaning:
         pass
 
     def clean_user_data(self, df):
+
+        df = df.copy()
+
         df = df.dropna()
 
         df['date_of_birth'] = pd.to_datetime(df['date_of_birth'], errors='coerce')
@@ -55,6 +58,9 @@ class DataCleaning:
         return df
     
     def convert_product_weights(self, df):
+
+        df = df.copy()
+
         conversion_rates = {
             'g': 0.001,
             'kg': 1,
@@ -65,6 +71,7 @@ class DataCleaning:
 
     
         def convert_weight(weight):
+            
             weight_str = str(weight).lower().strip().replace(' ', '') 
 
             num_str = ''
@@ -82,14 +89,14 @@ class DataCleaning:
                     num = float(num_str)
                     return num * conversion_rates.get(unit, 0)
                 except ValueError:
-                    return 0  
+                    return 'NaN' 
                 
         df['weight'] = df['weight'].apply(convert_weight)
 
-        print(df)
         return df
       
     def clean_products_data(self, df):
+
         df = df.copy()
 
         df.dropna(inplace=True)  
@@ -102,5 +109,23 @@ class DataCleaning:
 
         for column in columns_to_check:
             df = df[df[column] != 0]
+
+        return df
+    
+    def clean_orders_data(self, df):
+
+        df = df.copy()
+
+        df.drop(columns=['first_name', 'last_name', '1'], errors='ignore',inplace=True)
+
+        return df
+    
+    def clean_dates(self, df):
+
+        df = df.copy()
+
+        df['timestamp'].fillna('default_time', inplace=True) 
+
+        df['timestamp'] = df['timestamp'].fillna(pd.to_datetime('00:00:00').time())  
 
         return df
