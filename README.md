@@ -54,3 +54,38 @@ Step 5: Monitoring and Maintenance
 
 6. Monitor the Process: Keep an eye on the execution process. Ensure there are no errors or interruptions.
 7. Maintain the System: Regularly update the scripts and configurations as necessary to adapt to any changes in data source structures or database schema updates.
+
+## Installation
+### Prerequisites
+- **Python** : The project is developed using Python. Ensure you have Python 3.7 or newer installed on your system. You can download Python from [Python's official site.](https://www.python.org/downloads/)
+- **pip**: Python's package installer, pip, should be installed automatically with Python. Ensure it is updated to the latest version.
+- **AWS CLI**: This project interacts with AWS services. Install the AWS Command Line Interface (CLI) by following the guidelines available on the [AWS CLI documentation page.](https://aws.amazon.com/cli/)
+
+```bash
+git clone https://github.com/ajayb06 multinational-retail-data-centralisation841.git
+cd ../retail-data-centralisation841
+python main.py
+```
+### Install required packages
+Note: It is recommended that you set up a virtual environment to manage the dependencies effectively.
+
+```bash
+pip install -r requirements.txt
+```
+
+### Configure AWS credentials
+Note: To interact with AWS services, configure your AWS credentials using the AWS CLI.
+```bash
+aws configure
+```
+Follow the prompts to input your *AWS Access Key ID*, *Secret Access Key*, *default region*, and output format. These credentials are necessary for the project to access AWS resources.
+
+### Database Configuration
+Ensure the database credentials are properly configured in your ".yml" or ".env" file. You should specify the database **host**, **port**, **username**, **password**, and database name according to your setup.
+
+### Running the Project
+```bash
+python main.py
+```
+### Next Step
+After installation, you can start using the project as needed. If you encounter any issues, review the installation steps and ensure all configurations are correct. If you're still encountering issues contact me via email balakrishnanajay06@gmail.com
