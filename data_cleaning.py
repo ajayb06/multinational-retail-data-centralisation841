@@ -1,5 +1,6 @@
 import pandas as pd
 from database_utils import DatabaseConnector
+import re
 
 class DataCleaning:
 
@@ -19,6 +20,8 @@ class DataCleaning:
         df = df.dropna()
         df['date_of_birth'] = pd.to_datetime(df['date_of_birth'], errors='coerce')
         df['join_date'] = pd.to_datetime(df['join_date'], errors='coerce')
+        df = df[df['user_uuid'].apply(lambda x: len(str(x)) == 36)]
+        df = df.dropna()
         return df
     
     def clean_card_data(self, df: pd.DataFrame)-> pd.DataFrame:
@@ -29,10 +32,10 @@ class DataCleaning:
          raise ValueError("The DataFrame is empty")
         
         df = df.copy()
-        df['card_number'] = df['card_number'].astype(str)
-        df = df[df['card_number'].str.isdigit()]
+        df['card_number'] = df['card_number'].apply(lambda x: re.sub(r'\D', '', str(x)))
+        df = df[df['card_number'].str.isdigit() & df['card_number'].str.len()>0]
         df['expiry_date'] = pd.to_datetime(df['expiry_date'], errors='coerce', format='%m/%y')
-        df['expiry_date'] = df['expiry_date'].dt.strftime('%m/%Y')
+        df['expiry_date'] = df['expiry_date'].dt.strftime('%m/%y') if not df['expiry_date'].isna().all() else df['expiry_date']
         return df
 
     def clean_store_data(self, df: pd.DataFrame)->pd.DataFrame:
@@ -116,5 +119,8 @@ class DataCleaning:
 
         df = df.copy()
         df['timestamp'].fillna('default_time', inplace=True) 
-        df['timestamp'] = df['timestamp'].fillna(pd.to_datetime('00:00:00').time())  
+        df['timestamp'] = df['timestamp'].fillna(pd.to_datetime('00:00:00').time())
+        df = df[df['date_uuid'].apply(lambda x: len(str(x)) == 36)]
+        df = df.dropna()
+
         return df
