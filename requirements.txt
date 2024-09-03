@@ -13,7 +13,6 @@ plotly==5.16.1
 psycopg2==2.9.9
 psycopg2-binary==2.9.9
 python-dateutil==2.8.2
-pytz==2023.3
 pywin32==306
 PyYAML==6.0.1
 requests==2.31.0

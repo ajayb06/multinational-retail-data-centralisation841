@@ -27,9 +27,10 @@ class DataExtractor:
     def retrieve_pdf_data(self, link:str)->pd.DataFrame:
 
         """Retrieves data from a PDF file and returns it as a DataFrame."""
-
-        dataframe = tabula.read_pdf(link,pages='all', stream=True)
+        dataframe = tabula.read_pdf(link, pages='all')
         combined_database = pd.concat(dataframe, ignore_index=True)
+        print(combined_database.head())
+        print(combined_database.columns)
         return combined_database
 
     def list_number_of_stores(self)->int:

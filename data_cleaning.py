@@ -32,10 +32,14 @@ class DataCleaning:
          raise ValueError("The DataFrame is empty")
         
         df = df.copy()
-        df['card_number'] = df['card_number'].apply(lambda x: re.sub(r'\D', '', str(x)))
-        df = df[df['card_number'].str.isdigit() & df['card_number'].str.len()>0]
+        print(df.columns.tolist())
+        df['card_number'] = df['card_number'].apply(lambda x: re.sub(r'\D', '', str(x).strip()))
+        print(df.columns.tolist())
         df['expiry_date'] = pd.to_datetime(df['expiry_date'], errors='coerce', format='%m/%y')
+        print(df.columns.tolist())
         df['expiry_date'] = df['expiry_date'].dt.strftime('%m/%y') if not df['expiry_date'].isna().all() else df['expiry_date']
+        print(df.columns.tolist())
+        df = df.dropna()
         return df
 
     def clean_store_data(self, df: pd.DataFrame)->pd.DataFrame:
