@@ -87,5 +87,28 @@ Ensure the database credentials are properly configured in your ".yml" or ".env"
 ```bash
 python main.py
 ```
+
+### File Structure
+
+```
+multinational-retail-data-centralisation/
+│
+├── main.py                         # Main entry point for the project
+├── data_cleaning.py                # Python script for cleaning and transforming data
+├── data_extraction.py              # Python script for data extraction from various sources
+├── database_utils.py               # Python utility functions for database interaction
+├── requirements.txt                # List of dependencies required for the project
+├── .gitignore                      # Files and directories to be ignored by Git
+├── README.md                       # Project documentation
+└── __pycache__/                    # Directory containing compiled Python files
+```
+
+
 ### Next Step
 After installation, you can start using the project as needed. If you encounter any issues, review the installation steps and ensure all configurations are correct. If you're still encountering issues contact me via email balakrishnanajay06@gmail.com
+
+### License
+
+MIT License
+
+Copyright (c) 2024 by Ajay Balakrishnan
