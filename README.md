@@ -2,7 +2,7 @@
 
 #### Project Summary
 
-As a global enterprise offering a diverse range of products worldwide, we're facing a challenge with scattered sales information from various channels, complicating our analysis efforts. The primary objective of our project is to unify this information into a centralized, easily analyzable repository. The initial phase involves constructing a system that merges all of our existing data into a single, cohesive database. Subsequent phases will focus on utilizing this unified database to extract up-to-date business metrics, thereby enhancing our company's capacity for data-informed decision-making.
+The primary objective of our project is to unify this information into a star-schema database for optimised queries. The initial phase involves constructing a system that merges all of our existing data into a single, cohesive database. Subsequent phases will focus on utilizing this unified database to extract up-to-date business metrics, thereby enhancing decision-making processes, improving operational efficiency, and providing actionable insights for strategic growth.
 
 #### Data Intergration From Multiple Sources
 These are the following sources where data was extracted from:
@@ -87,5 +87,28 @@ Ensure the database credentials are properly configured in your ".yml" or ".env"
 ```bash
 python main.py
 ```
+
+### File Structure
+
+```
+multinational-retail-data-centralisation/
+│
+├── main.py                         # Main entry point for the project
+├── data_cleaning.py                # Python script for cleaning and transforming data
+├── data_extraction.py              # Python script for data extraction from various sources
+├── database_utils.py               # Python utility functions for database interaction
+├── requirements.txt                # List of dependencies required for the project
+├── .gitignore                      # Files and directories to be ignored by Git
+├── README.md                       # Project documentation
+└── __pycache__/                    # Directory containing compiled Python files
+```
+
+
 ### Next Step
 After installation, you can start using the project as needed. If you encounter any issues, review the installation steps and ensure all configurations are correct. If you're still encountering issues contact me via email balakrishnanajay06@gmail.com
+
+### License
+
+MIT License
+
+Copyright (c) 2024 by Ajay Balakrishnan
