@@ -8,8 +8,6 @@ class DataCleaning:
 
     def __init__(self):
 
-        """Initialize DataCleaning instance."""
-
         pass
 
     def clean_user_data(self, df: pd.DataFrame) -> pd.DataFrame: 
