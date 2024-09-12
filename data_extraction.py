@@ -12,7 +12,8 @@ class DataExtractor:
 
     def __init__(self):
 
-        ''' Initialise Data extractor'''
+        """ Initialise Data extractor"""
+
         db_connector = DatabaseConnector()
         self.db_engine = db_connector.init_db_engine()
         self.api_key = 'yFBQbwXe9J3sd6zWVAMrK6lcxxr0q1lr2PT6DDMX'
@@ -29,8 +30,6 @@ class DataExtractor:
         """Retrieves data from a PDF file and returns it as a DataFrame."""
         dataframe = tabula.read_pdf(link, pages='all')
         combined_database = pd.concat(dataframe, ignore_index=True)
-        print(combined_database.head())
-        print(combined_database.columns)
         return combined_database
 
     def list_number_of_stores(self)->int:
